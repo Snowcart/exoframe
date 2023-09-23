@@ -1,0 +1,64 @@
+[
+  {
+    "name" : "mace",
+    "label" : "Mace",
+    "description" : "A simple, but effective Mace used to bash in enemy machinery. Originally designed to damage frames.",
+    "slot" : "arms",
+    "value" : 5000,
+    "features" : [],
+    "tags" : [
+      {
+        "name" : "versatile",
+        "label" : "Versatile",
+        "description" : "You can cause a contested Strength or Reflex check"
+      },
+      {
+        "name" : "simple",
+        "label" : "Simple",
+        "description" : "This weapon is simple to use"
+      },
+      {
+        "name" : "melee",
+        "label" : "Melee",
+        "description" : "This is a melee weapon"
+      }
+    ],
+    "frameLock" : "",
+    "type" : "melee",
+    "damage" : "1d8",
+    "range" : "melee",
+    "weaponAccuracy" : 0,
+    "structureDamage" : "2"
+  },
+  {
+    "name" : "beamRifle",
+    "label" : "Beam Rifle",
+    "description" : "A easy to use energy weapon that fires beams of raw energy out",
+    "slot" : "arms",
+    "value" : 10000,
+    "features" : [],
+    "tags" : [
+      {
+        "name" : "versatile",
+        "label" : "Versatile",
+        "description" : "You can cause a contested Strength or Reflex check"
+      },
+      {
+        "name" : "simple",
+        "label" : "Simple",
+        "description" : "This weapon is simple to use"
+      },
+      {
+        "name" : "energy",
+        "label" : "Energy",
+        "description" : "This is an energy weapon"
+      }
+    ],
+    "frameLock" : "",
+    "type" : "ranged",
+    "damage" : "1d10",
+    "range" : "100m",
+    "weaponDifficulty" : 4,
+    "structureDamage" : "0"
+  }
+]

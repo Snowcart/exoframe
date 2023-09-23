@@ -1,0 +1,17 @@
+{
+  "primal": [
+    {
+      "name": "berserkDrive",
+      "label": "Berserk Drive",
+      "description": "Twice per deployment you may enter a primal berserk. You continue berserking as long as you land an attack, or are attacked once per turn. You cannot use shields while berserking and you cannot use any systems or weapons that require a pilot skill check. During your berserk you may move and use heavy weapons in a single turn. Additionally you can use a single heavy weapon with one hand. Your other hand cannot use a heavy weapon. You gain +1 to RES and + 1 to STR during your berserk",
+      "type": "active",
+      "active": true,
+      "modifiers": {
+        "response": 1,
+        "strength": 1
+      },
+      "uses": 2,
+      "usesRemaining": 2
+    }
+  ]
+}
