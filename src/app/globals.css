@@ -94,6 +94,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+textarea:focus, input:focus {
+  outline: none;
+}
 
 a {
   color: inherit;
@@ -105,3 +108,7 @@ a {
     color-scheme: dark;
   }
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

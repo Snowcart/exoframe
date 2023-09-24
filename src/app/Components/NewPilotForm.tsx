@@ -4,6 +4,9 @@ import PilotContext from "../Contexts/PilotContext";
 import { Pilot } from "../types/Pilot";
 import Selectable from "./Reusable/Selectable";
 import BackgroundPopup from "./Reusable/BackgroundPopup";
+import TextInput from "./Reusable/InputComponents/TextInput";
+import Button from "./Reusable/InputComponents/Button";
+import { Background } from "../types/Background";
 
 const backgrounds = require("../../../backgrounds.json");
 
@@ -18,6 +21,7 @@ const NewPilotForm = () => {
   const { pilot } = React.useContext(PilotContext);
   const [newPilot, setNewPilot] = React.useState<Pilot>({} as Pilot);
   const [page, setPage] = React.useState(NewPilotPages.Intro);
+  const [selectedBackground, setSelectedBackground] = React.useState<Background | null>();
   React.useEffect(() => {
     getInProgressPilot();
   }, []);
@@ -62,29 +66,18 @@ const NewPilotForm = () => {
             nextPage();
           }}
         >
-          <label>What is your name?</label>
-          <input
-            value={newPilot.name}
-            onChange={(e) => setNewPilot({ ...newPilot, name: e.target.value })}
-          />
-          <br />
-          <label>Please describe yourself</label>
-          <textarea
-            onChange={(e) =>
-              setNewPilot({ ...newPilot, description: e.target.value })
-            }
-            value={newPilot.description}
-          />
-          <br />
-          <button type="submit">Continue</button>
+          <TextInput label="Please enter your name" value={newPilot.name} onChange={(v) => {setNewPilot({...newPilot, name: v})}}/>
+          <TextInput label="Please describe yourself" value={newPilot.description} onChange={(v) => {setNewPilot({...newPilot, description: v})}} textarea />
+          <Button label="Continue" onClick={() => nextPage()} />
         </form>
       </IntroPageContainer>
     );
   };
 
+  // this is one of the worst things I've ever written
   const StatusPage = () => {
     return (
-      <Selectable label={backgrounds["humanDebris"].label} onClick={() => {}} />
+      <Selectable label={backgrounds["humanDebris"].label} onClick={() => setSelectedBackground(backgrounds["humanDebris"])} />
     );
   };
 
@@ -118,7 +111,7 @@ const NewPilotForm = () => {
         {page === NewPilotPages.Intro && IntroPage()}
         {page === NewPilotPages.Status && StatusPage()}
       </Container>
-      <BackgroundPopup />
+      {selectedBackground && <BackgroundPopup close={() => setSelectedBackground(null)} select={() => setSelectedBackground(null)} background={selectedBackground} />}
     </>
   );
 };
