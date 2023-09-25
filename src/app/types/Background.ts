@@ -5,5 +5,7 @@ export interface Background {
   label: string;
   description: string;
   quote: string;
+  attribution: string;
+  src: string;
   features: PilotFeature[];
 }

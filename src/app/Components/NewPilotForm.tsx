@@ -7,14 +7,16 @@ import BackgroundPopup from "./Reusable/BackgroundPopup";
 import TextInput from "./Reusable/InputComponents/TextInput";
 import Button from "./Reusable/InputComponents/Button";
 import { Background } from "../types/Background";
+import AbilityScoreSelector from "./AbilityScoreSelector";
+import { PilotStats } from "../types/PilotStats";
 
 const backgrounds = require("../../../backgrounds.json");
 
 const NewPilotForm = () => {
   enum NewPilotPages {
     Intro,
-    Status,
     Abilities,
+    Status,
     Frame,
   }
 
@@ -42,10 +44,29 @@ const NewPilotForm = () => {
     }
   };
 
+  const selectBackground = (bg: Background) => {
+    setNewPilot({ ...newPilot, background: bg });
+    setSelectedBackground(null);
+    setInProgressPilot({ ...newPilot});
+    setPage(page + 1);
+  }
+
   const nextPage = () => {
     setInProgressPilot(newPilot);
     setPage(page + 1);
   };
+
+  const setStats = (stats: PilotStats) => {
+    setNewPilot({ ...newPilot, stats });
+    setInProgressPilot({ ...newPilot, stats });
+    setPage(page + 1);
+  }
+
+  const back = () => {
+    if (page > 0) {
+      setPage(page -1);
+    }
+  }
 
   const IntroPage = () => {
     return (
@@ -76,9 +97,9 @@ const NewPilotForm = () => {
 
   // this is one of the worst things I've ever written
   const StatusPage = () => {
-    return (
-      <Selectable label={backgrounds["humanDebris"].label} onClick={() => setSelectedBackground(backgrounds["humanDebris"])} />
-    );
+    return ( backgrounds.map((bg: Background) => {
+      return <Selectable label={bg.label} onClick={() => setSelectedBackground(bg)} />;
+    }))
   };
 
   const ModalHeader = () => {
@@ -86,11 +107,11 @@ const NewPilotForm = () => {
       if (page === NewPilotPages.Intro) {
         return "Welcome New Pilot";
       }
-      if (page === NewPilotPages.Status) {
-        return "Please select your background";
-      }
       if (page === NewPilotPages.Abilities) {
         return "Please select your abilities";
+      }
+      if (page === NewPilotPages.Status) {
+        return "Please select your background";
       }
       if (page === NewPilotPages.Frame) {
         return "Please select your frame";
@@ -98,7 +119,7 @@ const NewPilotForm = () => {
     };
     return (
       <Header>
-        <div>Back</div>
+        <div onClick={() => back()}>Back</div>
         <HeaderTitle>{title()}</HeaderTitle>
       </Header>
     );
@@ -110,8 +131,9 @@ const NewPilotForm = () => {
         <ModalHeader />
         {page === NewPilotPages.Intro && IntroPage()}
         {page === NewPilotPages.Status && StatusPage()}
+        {page === NewPilotPages.Abilities && <AbilityScoreSelector nextPage={(stats: PilotStats) => setStats(stats)} savedStats={newPilot.stats}/>}
       </Container>
-      {selectedBackground && <BackgroundPopup close={() => setSelectedBackground(null)} select={() => setSelectedBackground(null)} background={selectedBackground} />}
+      {selectedBackground && <BackgroundPopup close={() => setSelectedBackground(null)} select={() => selectBackground(selectedBackground)} background={selectedBackground} />}
     </>
   );
 };
@@ -123,7 +145,8 @@ const Container = styled.section`
   border: 1px solid turquoise;
   justify-content: center;
   margin: 0 auto;
-  height: 50rem;
+  overflow-y: scroll;
+  min-height: 50rem;
 `;
 
 const Header = styled.div`

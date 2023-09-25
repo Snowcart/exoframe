@@ -9,7 +9,7 @@ export interface PilotFeature {
   active: boolean;
   uses: number;
   usesRemaining: number;
-  modifiers: PilotStats;
+  pilotModifiers: PilotStats;
   visible: boolean;
   frameModifiers: FrameStats;
 }

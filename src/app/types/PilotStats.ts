@@ -1,7 +1,7 @@
 export interface PilotStats {
-  reflex: number;
-  sway: number;
-  insight: number;
-  mechanics: number;
-  grit: number;
+  reflex: number | undefined;
+  sway: number | undefined;
+  insight: number | undefined;
+  mechanics: number | undefined;
+  grit: number | undefined;
 }
