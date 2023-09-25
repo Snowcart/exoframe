@@ -1,4 +1,4 @@
-import { PilotStats } from "@/app/types/Pilot";
+import { PilotStats } from "@/app/types/PilotStats";
 import styled from "styled-components";
 
 const PilotStatGrid = (props: Props) => {
